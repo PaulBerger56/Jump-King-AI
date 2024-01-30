@@ -1,5 +1,7 @@
 import cv2, mss, os, threading
 import numpy as np
+from numba import jit, cuda
+
 
 bounding_box = {'top': 0, 'left': 0, 'width': 1920, 'height': 1080}
 image_folder_path = r"Images"
@@ -7,18 +9,8 @@ image_folder_path = r"Images"
 files = os.listdir(image_folder_path)
 reference_images = []
 
-for file_name in files:
-    
-    if file_name.endswith('.PNG'):
-       file_path = os.path.join(image_folder_path, file_name)
-       
-       image =  cv2.imread(file_path, cv2.IMREAD_UNCHANGED)
-       
-       reference_images.append(image)
-       
-sct = mss.mss()
-
-while True:
+@jit()
+def screen_grab():
     sct_img = sct.grab(bounding_box)    
     img = np.array(sct_img)    
     
@@ -47,6 +39,23 @@ while True:
     
     scaled_img = cv2.resize(img, (960, 540))
     cv2.imshow('Screen Capture', np.array(scaled_img))
+    
+    
+
+for file_name in files:
+    
+    if file_name.endswith('.PNG'):
+       file_path = os.path.join(image_folder_path, file_name)
+       
+       image =  cv2.imread(file_path, cv2.IMREAD_UNCHANGED)
+       
+       reference_images.append(image)
+       
+sct = mss.mss()
+
+
+while True:
+    screen_grab()
     
     if cv2.waitKey(1) & 0xFF == 27:
         break
