@@ -1,4 +1,4 @@
-import pyautogui, time, pydirectinput
+import pyautogui, time, pydirectinput, king_controller as kc, threading
 
 # Initialized PyAutoGui
 pyautogui.FAILSAFE = False
@@ -10,65 +10,51 @@ for i in range(0, 5):
     time.sleep(1)
 print("\nGo")
 
-pydirectinput.keyDown(key='space')
-pydirectinput.keyDown(key='right')
-time.sleep(1.2)
-pydirectinput.keyUp(key='right') 
-pydirectinput.keyUp(key='space')
+# t1 = threading.Thread(target=kc.pressJump(1.2))
+# t2 = threading.Thread(target=kc.press_right(1.2))
 
-pydirectinput.keyDown(key='space')
-pydirectinput.keyDown(key='left')
-time.sleep(1.0) 
-pydirectinput.keyUp(key='left')
-pydirectinput.keyUp(key='space')
+# t1.start()
+# t2.start()
+
+# t1.join()
+# t2.join()
 
 
-pydirectinput.keyDown(key='left')
-time.sleep(.2) 
-pydirectinput.keyUp(key='left')
+# kc.pressJump(1.2)
+# kc.press_right(1.2)
+# pydirectinput.keyDown(key='space')
+# pydirectinput.keyDown(key='_right')
+# time.sleep(1.2)
+# pydirectinput.keyUp(key='_right')  
+# pydirectinput.keyUp(key='space')
+kc.jump_right(1.2)
 
-pydirectinput.keyDown(key='space')
-pydirectinput.keyDown(key='right')
-time.sleep(1.2)
-pydirectinput.keyUp(key='space')
-pydirectinput.keyUp(key='right')
+kc.jump_left(1.0)
 
-pydirectinput.keyDown(key='space')
-pydirectinput.keyDown(key='right')
-time.sleep(1.2)
-pydirectinput.keyUp(key='space')
-pydirectinput.keyUp(key='right')
+kc.press_left(.1)  
+  
+kc.jump_right(1.2)
 
-pydirectinput.keyDown(key='space')
-pydirectinput.keyDown(key='left')
-time.sleep(1.2) 
-pydirectinput.keyUp(key='space')
-pydirectinput.keyUp(key='left')
+kc.jump_right(1.2)
 
-pydirectinput.keyDown(key='right')
-time.sleep(.2) 
-pydirectinput.keyUp(key='right')
+kc.jump_left(1.2)
 
-pydirectinput.keyDown(key='space')
-pydirectinput.keyDown(key='left')
-time.sleep(1.2) 
-pydirectinput.keyUp(key='space')
-pydirectinput.keyUp(key='left')
-    
-pydirectinput.keyDown(key='space')
-pydirectinput.keyDown(key='right')
-time.sleep(1.2)
-pydirectinput.keyUp(key='space')
-pydirectinput.keyUp(key='right')
+kc.press_right(.2)
+
+kc.jump_left(1.2)
+
+kc.jump_right(1.2)
+
+kc.quick_jump_right()
 
 
-pydirectinput.keyDown(key='right')
-time.sleep(.2)
-pydirectinput.keyDown(key='space')
-time.sleep(.1)
-pydirectinput.keyUp(key='space')
-time.sleep(.2)
-pydirectinput.keyUp(key='right')
+# pydirectinput.keyDown(key='_right')
+# time.sleep(.2)
+# pydirectinput.keyDown(key='space')
+# time.sleep(.1)
+# pydirectinput.keyUp(key='space')
+# time.sleep(.2)
+# pydirectinput.keyUp(key='_right')
 
 pydirectinput.keyDown(key='space')
 pydirectinput.keyDown(key='right')

@@ -9,9 +9,9 @@ image_folder_path = r"Images"
 files = os.listdir(image_folder_path)
 reference_images = []
 
-@jit(target_backend='cuda')
-def template_match(ref_img):
-    ref_img_result = cv2.matchTemplate(img, ref_img, cv2.TM_CCOEFF_NORMED)
+# @jit(target_backend='cuda')
+def template_match(input_img):
+    ref_img_result = cv2.matchTemplate(img, input_img, cv2.TM_CCOEFF_NORMED)
     return ref_img_result
 
 for file_name in files:
@@ -34,7 +34,7 @@ while True:
         w = ref_img.shape[1]
         h = ref_img.shape[0]
         
-        ref_img_result = template_match(ref_img=ref_img)
+        ref_img_result = template_match(input_img=ref_img)
         ref_img_min_val, ref_img_max_val, ref_img_min_loc, ref_img_max_loc = cv2.minMaxLoc(ref_img_result)
         
         ref_img_threshold = .48
